@@ -1,0 +1,72 @@
+﻿<h1>@Titulo</h1>
+
+
+@if (tarefas == null)
+{
+	<Alerta Mensagem="Carregando..." /> 
+}
+else if (!tarefas.Any())
+{
+	<Alerta Mensagem="Ainda não existem tarefas." />				
+}
+else
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Ação</th>
+				<th>Data</th>
+				<th>Descrição</th>
+				<th>Concluída</th>
+			</tr>
+		</thead>
+		<tbody>
+		@foreach (var t in tarefas)
+		{
+			<tr>
+				<TarefaIndividual item="t" RemoverTarefa="RemoverTarefa"/>
+			</tr>
+		}
+		</tbody>
+	</table>
+}
+
+@if (tarefas != null)
+{
+	<div class="form-group">
+		<label>Tarefas</label>
+		<input type="text" placeholder="Informe a tarefa" @bind="novaTarefa"/>
+		<button class="btn btn-primary"	@onclick="AdicionarNovaTarefa">Adicionar</button>
+	</div>
+}
+
+@code
+{
+	[Parameter]
+	public List<Tarefa> tarefas { get; set; }
+	[Parameter]
+	public string Titulo { get; set; }
+
+	private string novaTarefa = string.Empty;
+
+	void AdicionarNovaTarefa()
+	{
+		if (!string.IsNullOrWhiteSpace(novaTarefa))
+		{
+			tarefas.Add(new Tarefa
+				{
+					DataCriacao = DateTime.Now,
+					Descricao = novaTarefa,
+					ID = Guid.NewGuid()
+				}
+			);
+
+			novaTarefa = string.Empty;
+		}
+	}
+
+	void RemoverTarefa(Tarefa t)
+	{
+		tarefas.Remove(t);
+	}
+}
