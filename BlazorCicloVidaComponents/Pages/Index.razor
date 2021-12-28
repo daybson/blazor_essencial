@@ -1,0 +1,44 @@
+﻿@page "/"
+@implements IDisposable
+@inject ServicoSingleton singleton
+@inject ServicoScopped scopped
+@inject ServicoTransient transiet
+
+<h1>@Titulo</h1>
+<p>Singleton count: @singleton.Valor</p>
+<p>Scopped count: @scopped.Valor</p>
+<p>Transient count: @transiet.Valor</p>
+
+@code{
+	private	string Titulo { get; set; }
+	private	string HoraRender { get; set; }
+
+	protected override void OnInitialized()
+	{
+		HoraRender = DateTime.Now.ToLongTimeString();
+		Titulo = "Olá Blazor";
+		Console.WriteLine($"OnInitialized {HoraRender}");
+		base.OnInitialized();
+	}
+
+	protected override void OnParametersSet()
+	{
+		HoraRender = DateTime.Now.ToLongTimeString();
+		Console.WriteLine($"OnParametersSet {HoraRender}");
+
+		base.OnInitialized();
+	}
+
+	protected override void OnAfterRender(bool firstRender)
+	{
+		HoraRender = DateTime.Now.ToLongTimeString();
+		Console.WriteLine($"OnAfterRender {HoraRender}");
+		base.OnAfterRender(firstRender);
+	}
+
+	public void Dispose()
+	{
+		HoraRender = DateTime.Now.ToLongTimeString();
+		Console.WriteLine($"Dispose {HoraRender}");
+	}
+}

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorCicloVidaComponents", "BlazorCicloVidaComponents.csproj", "{29AC1656-CEAA-4F24-9476-4E6EFDE36EAC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{29AC1656-CEAA-4F24-9476-4E6EFDE36EAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29AC1656-CEAA-4F24-9476-4E6EFDE36EAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29AC1656-CEAA-4F24-9476-4E6EFDE36EAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29AC1656-CEAA-4F24-9476-4E6EFDE36EAC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EFD38517-CCCD-435E-AE75-9FA4A5AE4187}
+	EndGlobalSection
+EndGlobal
