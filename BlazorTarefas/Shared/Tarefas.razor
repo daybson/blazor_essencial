@@ -1,35 +1,24 @@
 ﻿<h1>@Titulo</h1>
 
 
-@if (tarefas == null)
-{
-	<Alerta Mensagem="Carregando..." /> 
-}
-else if (!tarefas.Any())
-{
-	<Alerta Mensagem="Ainda não existem tarefas." />				
-}
-else
-{
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Ação</th>
-				<th>Data</th>
-				<th>Descrição</th>
-				<th>Concluída</th>
-			</tr>
-		</thead>
-		<tbody>
-		@foreach (var t in tarefas)
-		{
-			<tr>
-				<TarefaIndividual item="t" RemoverTarefa="RemoverTarefa"/>
-			</tr>
-		}
-		</tbody>
-	</table>
-}
+<table class="table">
+	<thead>
+		<tr>
+			<th>Ação</th>
+			<th>Data</th>
+			<th>Descrição</th>
+			<th>Concluída</th>
+		</tr>
+	</thead>
+	<tbody>	
+		<ListaGenerica ListaItems="tarefas">
+			<Lista Context="t"> 
+				<TarefaIndividual item="t" RemoverTarefa="RemoverTarefa" />
+			</Lista>
+		</ListaGenerica>
+	</tbody>
+</table>
+
 
 @if (tarefas != null)
 {
