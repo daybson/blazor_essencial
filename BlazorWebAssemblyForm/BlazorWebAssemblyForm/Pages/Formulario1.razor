@@ -1,0 +1,66 @@
+﻿@page "/formulario1"
+@attribute [Authorize(Roles = "Admin")]
+
+<AuthorizeView>
+	<Authorized>
+		<h1>Formulário</h1>
+
+		@if (ultimoSubmit != null)
+		{
+			<h2>Status: @ultimoSubmit</h2>
+		}
+
+		@*<EditForm Model="@usuario" OnValidSubmit="@OnValidSubmission" OnInvalidSubmit="@OnInvalidSubmission">*@
+		<EditForm Model="@usuario" OnSubmit="@OnSubmitForm" Context="formContext">
+			<DataAnnotationsValidator />
+			<ValidationSummary />
+			<div class="form-group">
+				<label form="nome">Nome</label>
+				<InputText id="nome" @bind-Value="usuario.Nome" class="form-control" />
+				<ValidationMessage For="() => usuario.Nome" />
+			</div>
+
+			<div class="form-group">
+				<label form="email">Email</label>
+				<InputText id="email" @bind-Value="usuario.Email" class="form-control" />
+				<ValidationMessage For="@(() => usuario.Email)" />
+			</div>
+
+			<div class="form-group">
+				<label form="idade">Idade</label>
+				<InputNumber id="idade" @bind-Value="usuario.Idade" class="form-control" />
+				<ValidationMessage For="@(() => usuario.Idade)" />
+			</div>
+
+			<input type="submit" value="Enviar Formulário" class="btn-primary" />
+		</EditForm>
+	</Authorized>
+
+	<NotAuthorized>
+		<h2>Acesso não autorizado.</h2>
+	</NotAuthorized>
+
+</AuthorizeView>
+
+@code {
+	Usuario usuario = new Usuario() { Idade = 29 };
+	string ultimoSubmit;
+
+	private void OnValidSubmission(EditContext editContext)
+	{
+		ultimoSubmit = $"OnValidSubmission: {editContext.Validate()}";
+		Console.WriteLine($"Submit: {usuario.Nome},{usuario.Email},{usuario.Idade}");
+	}
+
+	private void OnInvalidSubmission(EditContext editContext)
+	{
+		ultimoSubmit = $"OnInvalidSubmission: {editContext.Validate()}";
+		Console.WriteLine($"Submit: {usuario.Nome},{usuario.Email},{usuario.Idade}");
+	}
+
+
+	private void OnSubmitForm(EditContext editContext)
+	{
+		ultimoSubmit = $"Submetido {editContext.Validate()}";
+	}
+}
